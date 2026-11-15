@@ -17,26 +17,26 @@ Under what explicit observability and modeling assumptions can the completeness 
 
 ## 3. Formal sketches examined
 
-Let (M) be a partial model, (Gamma(M)) its admissible concretizations, (Delta) a change, and (Omega(s,Delta)) the obligations required in context (s).
+Let \(M\) be a partial model, \(\Gamma(M)\) its admissible concretizations, \(\Delta\) a change, and \(\Omega(s,\Delta)\) the obligations required in context \(s\).
 
 The examined universal/existential classification was:
 
-[
-Omega^{-}(M,Delta)=igcap_{sinGamma(M)}Omega(s,Delta)
-]
+\[
+\Omega^{-}(M,\Delta)=\bigcap_{s\in\Gamma(M)}\Omega(s,\Delta)
+\]
 
-[
-Omega^{+}(M,Delta)=igcup_{sinGamma(M)}Omega(s,Delta)
-]
+\[
+\Omega^{+}(M,\Delta)=\bigcup_{s\in\Gamma(M)}\Omega(s,\Delta)
+\]
 
-[
-U(M,Delta)=Omega^{+}(M,Delta)\setminusOmega^{-}(M,Delta)
-]
+\[
+U(M,\Delta)=\Omega^{+}(M,\Delta)\setminus\Omega^{-}(M,\Delta)
+\]
 
 The interpretation was:
-- (Omega^{-}): obligations necessary in every admissible concretization;
-- (Omega^{+}): obligations necessary in at least one admissible concretization;
-- (U): obligations whose necessity is indeterminate under the partial model.
+- \(\Omega^{-}\): obligations necessary in every admissible concretization;
+- \(\Omega^{+}\): obligations necessary in at least one admissible concretization;
+- \(U\): obligations whose necessity is indeterminate under the partial model.
 
 This construction is mathematically coherent as a classification, but it maps directly to universal/existential reasoning over concretizations and three-valued semantics for partial specifications. It does not itself establish a new algorithm or theorem.
 
@@ -59,7 +59,7 @@ This construction is mathematically coherent as a classification, but it maps di
 ## 6. Preserved negative findings
 
 - Generic indistinguishability proposition: valid, but not novel as formulated.
-- (Omega^{-}), (Omega^{+}), and (U) classification: valid formal sketch, but reducible to partial-specification semantics.
+- \(\Omega^{-}\), \(\Omega^{+}\), and \(U\) classification: valid formal sketch, but reducible to partial-specification semantics.
 - Assurance 2.0 / ASP overlap: decisive prior-art risk.
 - Requirements completeness, defeater analysis, and information acquisition remain mature neighboring areas.
 - No code, benchmark, prototype, or dataset was created or authorized.
