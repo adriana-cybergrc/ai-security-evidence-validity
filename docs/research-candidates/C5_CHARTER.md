@@ -1,107 +1,71 @@
 # C5 — Certifiable Completeness of Change-Conditioned Assurance Obligations under Partial System Observability
 
-**Status:** PROPOSED / UNDER PRIOR-ART REVIEW  
+**Status:** REJECTED — NO-GO (2026-11-14)  
 **Originality:** NOT ESTABLISHED  
 **Implementation:** NOT AUTHORIZED  
-**Decision gate:** prior-art equivalence and formal reduction analysis
+**Repository status:** Preserved as a negative research record
 
-## 1. Motivation
+## 1. Original motivation
 
-The R1 closure review identified a recurring boundary in recent evidence-selection work: methods can select a minimum-cost subset of evidence relative to a supplied set of obligations, while the adequacy or discovery of those obligations remains an upstream problem.
+C5 investigated whether the completeness of change-conditioned assurance obligations could be certified when relevant system context, assumptions, or defeaters are only partially observable.
 
-C5 investigates that upstream boundary. It does **not** propose another dependency-impact selector, evidence cache, minimum-cost evidence envelope, or incremental/full execution equivalence method.
+It was intentionally distinguished from dependency-impact analysis, evidence selection, evidence caching, and incremental/full execution equivalence.
 
 ## 2. Preliminary research question
 
 Under what explicit observability and modeling assumptions can the completeness of a change-conditioned assurance-obligation set be certified, and what lower bound on unresolved obligations remains when relevant system context, assumptions, or defeaters are unobserved?
 
-## 3. Scope distinction
+## 3. Formal sketches examined
 
-C5 concerns the adequacy of the obligation set itself:
-- Which claim-relevant obligations must hold after a specified system change?
-- Which contextual assumptions and defeaters can alter that obligation set?
-- What can be certified from available observations?
-- When is completeness unprovable without additional information?
+Let (M) be a partial model, (Gamma(M)) its admissible concretizations, (Delta) a change, and (Omega(s,Delta)) the obligations required in context (s).
 
-Evidence selection and revalidation are downstream consumers of the obligation set and are outside the primary contribution.
+The examined universal/existential classification was:
 
-## 4. Initial formal vocabulary
-
-Let:
-- (S) be the actual system and operational context;
-- (O(S)) be the information observable to the assurance process;
-- (C) be a top-level security claim;
-- (A) be a structured assurance argument;
-- (Delta) be a specified system change;
-- (Omega(C,A,Delta,S)) be the set of obligations required to sustain (C) after (Delta);
-- (widehat{Omega}) be the obligation set produced from available observations.
-
-The central question is whether a procedure can certify:
 [
-Omega(C,A,Delta,S)subseteqwidehat{Omega}
+Omega^{-}(M,Delta)=igcap_{sinGamma(M)}Omega(s,Delta)
 ]
-for all admissible system contexts consistent with the observations and declared assumptions.
 
-This expression is a research target, not an established result. The admissible context class, obligation semantics, and meaning of completeness remain to be defined.
+[
+Omega^{+}(M,Delta)=igcup_{sinGamma(M)}Omega(s,Delta)
+]
 
-## 5. Candidate hypothesis H5
+[
+U(M,Delta)=Omega^{+}(M,Delta)\setminusOmega^{-}(M,Delta)
+]
 
-There may exist nontrivial, explicit conditions on observability, argument structure, and defeater coverage under which a finite certificate can establish that a generated obligation set is complete for a bounded class of AI security assurance claims and changes.
+The interpretation was:
+- (Omega^{-}): obligations necessary in every admissible concretization;
+- (Omega^{+}): obligations necessary in at least one admissible concretization;
+- (U): obligations whose necessity is indeterminate under the partial model.
 
-The hypothesis is rejected if:
-- the result reduces to ordinary requirements traceability/completeness checking;
-- the result is equivalent to established assurance-case completeness or defeater-analysis methods;
-- the certificate merely verifies completeness relative to a manually supplied obligation universe;
-- the only sound procedure is to include every conceivable obligation;
-- no independently checkable and falsifiable completeness condition can be defined.
+This construction is mathematically coherent as a classification, but it maps directly to universal/existential reasoning over concretizations and three-valued semantics for partial specifications. It does not itself establish a new algorithm or theorem.
 
-## 6. Core theoretical risks
+## 4. Why C5 was rejected
 
-1. **Open-world impossibility:** if two contexts are observationally indistinguishable but imply different required obligations, exact completeness cannot be certified from the observations alone.
-2. **Oracle dependence:** a manually supplied universe of all relevant obligations makes the problem circular.
-3. **Trivial over-approximation:** including every possible obligation may be sound but useless.
-4. **Reduction to requirements engineering:** completeness and traceability of requirements are mature topics.
-5. **Reduction to assurance-case assessment:** structural completeness, argument validity, assumptions, and defeaters are established assurance concerns.
-6. **Reduction to optimal information acquisition:** selecting observations that distinguish admissible contexts may be a standard active-information or decision-theoretic problem.
+1. **Assurance-case completeness overlap:** completeness, argument adequacy, assumptions, hazards, and defeaters are established assurance-case concerns.
+2. **Automated semantic analysis overlap:** goal-directed ASP and Assurance 2.0 tooling already analyze semantic properties of assurance arguments, including completeness-related conditions.
+3. **Partial-model checking reduction:** universal/existential classification across concretizations is established partial-specification / three-valued model-checking semantics.
+4. **Generic impossibility is insufficient:** indistinguishable contexts with different obligations imply a basic information-theoretic impossibility, not a distinct contribution by itself.
+5. **Obligation-universe problem remains:** verifying all obligations in a supplied vocabulary does not prove that the vocabulary contains every relevant obligation. A non-oracular generator with a completeness guarantee was not established.
+6. **No nontrivial lower bound:** no result stronger than generic partial-observability limits was demonstrated.
 
-## 7. Prior art that must be examined first
+## 5. Rejection criteria triggered
 
-- Goswami (2026), *Assurance Envelopes for Autonomous Coding Agents*, arXiv:2609.16302 — explicitly leaves obligation discovery outside its evidence-selection contribution: https://arxiv.org/abs/2609.16302
-- Mukhopadhyay & Nalla (2026), *Reusing Assurance Evidence in AI Pipelines*, arXiv:2610.27672: https://arxiv.org/abs/2610.27672
-- ISO/IEC/IEEE 15026-2:2022, assurance case structure and completeness terminology.
-- GSN assurance-case completeness, argument assessment, and defeater analysis.
-- Requirements completeness, bidirectional traceability, derived requirements, and change-impact analysis.
-- Formal verification of requirements coverage and completeness under partial specifications.
-- Active learning / optimal information acquisition under partial observability.
+- The proposed result reduces to established assurance-case completeness and semantic assessment.
+- The proposed formal classification reduces to established partial-model / three-valued model checking.
+- A certificate over a manually supplied obligation universe would be circular with respect to open-world completeness.
+- No independent, non-oracular completeness certificate or stronger lower bound was established.
 
-## 8. Required research gates
+## 6. Preserved negative findings
 
-### Gate 1 — Definition
-Define obligation semantics independently of the evidence-selection algorithm. Establish what counts as a required obligation and how claims, contexts, assumptions, strategies, and defeaters contribute.
+- Generic indistinguishability proposition: valid, but not novel as formulated.
+- (Omega^{-}), (Omega^{+}), and (U) classification: valid formal sketch, but reducible to partial-specification semantics.
+- Assurance 2.0 / ASP overlap: decisive prior-art risk.
+- Requirements completeness, defeater analysis, and information acquisition remain mature neighboring areas.
+- No code, benchmark, prototype, or dataset was created or authorized.
 
-### Gate 2 — Non-oracular completeness
-Define a certificate whose verification does not require an oracle containing the complete obligation universe.
+## 7. Final decision
 
-### Gate 3 — Impossibility and lower bounds
-Construct indistinguishable admissible contexts with different obligation sets. Determine the minimum additional information needed to distinguish them, and test whether the resulting lower bound is stronger than generic partial-observation impossibility.
+**NO-GO — C5 is closed as an independent research candidate.**
 
-### Gate 4 — Prior-art reduction
-Compare the formal result against assurance-case completeness, requirements traceability, defeater analysis, formal specification coverage, and information-acquisition methods.
-
-### Gate 5 — Go / no-go
-Proceed only if C5 yields a nontrivial theorem or algorithmic guarantee that cannot be reduced to the established methods above. Otherwise reject it without implementation.
-
-## 9. Experimental policy
-
-No code, benchmark, prototype, or dataset collection before Gates 1–4 pass. Any later experiment must compare against:
-- manual obligation elicitation;
-- traceability/completeness checking;
-- assurance-case structural assessment;
-- a conservative all-obligations baseline;
-- an information-acquisition baseline, where applicable.
-
-Measure completeness errors, false completeness certificates, unresolved obligation mass, information acquisition cost, and computational cost. Define operational metrics only after the semantics are fixed.
-
-## 10. Current decision
-
-C5 is a research candidate, not an approved thesis or a novelty claim. The next task is a focused literature review and formal definition of obligation completeness. No implementation or publication is authorized.
+This rejection applies to the current formulation and its examined variants. It does not assert that all research on AI security assurance obligations is exhausted. Any future proposal must introduce a materially different formal object or guarantee and pass a new prior-art reduction before implementation.
